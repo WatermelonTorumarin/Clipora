@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Clipora</title>
+<link rel="stylesheet" href="janela.css" />
+</head>
+<body>
+<header class="topo">
+  <img src="icones/icone-32.png" alt="" width="24" height="24" />
+  <strong>Clipora</strong>
+  <button id="abrir-ajustes" class="icone" type="button" title="Endereço do Clipora" aria-label="Endereço do Clipora">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5L19.4 13ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" fill="currentColor" transform="translate(-1 0)"/></svg>
+  </button>
+</header>
+
+<main>
+  <section id="carregando" class="bloco">
+    <div class="giro" aria-hidden="true"></div>
+    <p id="carregando-texto">Lendo a página...</p>
+  </section>
+
+  <section id="video" class="bloco hidden">
+    <img id="video-capa" class="capa" alt="" />
+    <h1 id="video-titulo"></h1>
+    <p id="video-canal" class="sutil"></p>
+    <p class="rotulo">Escolha a qualidade para baixar:</p>
+    <div id="qualidades" class="qualidades"></div>
+    <p class="sutil">O Windows pergunta onde salvar: começa na Área de Trabalho ou na última pasta usada.</p>
+    <button id="video-editar" class="link" type="button">Abrir no Clipora para cortar ou editar</button>
+  </section>
+
+  <section id="imagem" class="bloco hidden">
+    <img id="imagem-previa" class="capa previa" alt="" />
+    <h1 id="imagem-titulo"></h1>
+    <button id="imagem-baixar" class="principal" type="button" disabled>Carregando a imagem...</button>
+    <p class="sutil">O Windows pergunta onde salvar: começa na Área de Trabalho ou na última pasta usada.</p>
+  </section>
+
+  <section id="progresso" class="bloco hidden">
+    <h1 id="progresso-titulo">Preparando o vídeo</h1>
+    <div class="barra"><span id="progresso-barra"></span></div>
+    <p id="progresso-texto" class="sutil"></p>
+    <button id="progresso-cancelar" class="secundario" type="button">Cancelar</button>
+  </section>
+
+  <section id="pronto" class="bloco hidden">
+    <div class="ok" aria-hidden="true">✓</div>
+    <h1 id="pronto-titulo">Salvo</h1>
+    <p id="pronto-texto" class="sutil"></p>
+  </section>
+
+  <section id="coletando" class="bloco hidden">
+    <div class="giro" aria-hidden="true"></div>
+    <h1>Juntando as imagens</h1>
+    <p class="sutil">A caixinha do Clipora no canto da página rola sozinha e junta as imagens. Quando terminar (ou quando você clicar em "Enviar ao Clipora"), o Clipora abre numa nova aba para você escolher as imagens e a pasta.</p>
+  </section>
+
+  <section id="erro" class="bloco hidden">
+    <h1>Não deu para baixar daqui</h1>
+    <p id="erro-texto"></p>
+    <div class="acoes">
+      <button id="erro-coletar" class="principal hidden" type="button">Juntar as imagens desta página</button>
+      <button id="erro-abrir" class="secundario hidden" type="button">Abrir no Clipora</button>
+    </div>
+  </section>
+
+  <section id="ajustes" class="bloco hidden">
+    <h1>Endereço do Clipora</h1>
+    <p class="sutil">Onde o seu Clipora está rodando. Pelo Tailscale: https://clipora.&lt;sua-tailnet&gt;.ts.net. No próprio PC do Clipora também serve http://localhost:3000.</p>
+    <form id="ajustes-form">
+      <input id="ajustes-endereco" type="url" required spellcheck="false" autocomplete="off" />
+      <p id="ajustes-erro" class="erro-linha"></p>
+      <div class="acoes">
+        <button class="principal" type="submit">Salvar</button>
+        <button id="ajustes-voltar" class="secundario" type="button">Voltar</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<script type="module" src="janela.js"></script>
+</body>
+</html>

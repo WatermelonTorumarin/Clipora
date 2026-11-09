@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#11131f" />
+    <title>Clipora - baixe, recorte e comprima vídeos</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Clipora, página inicial">
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6.5v11l9-5.5-9-5.5Z" fill="currentColor" /></svg>
+        </span>
+        <span>clipora</span>
+      </a>
+      <div class="top-actions">
+        <span class="secure-pill">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.7 2.9 8 7 10 4.1-2 7-5.3 7-10V6l-7-3Zm3.2 6.8-3.8 4-2.2-2.1 1.1-1.1 1.1 1.1 2.7-2.9 1.1 1Z" fill="currentColor"/></svg>
+          Download local
+        </span>
+      </div>
+    </header>
+
+    <main>
+      <!-- Página inicial -->
+      <div id="home-view">
+        <section class="hero">
+          <div class="eyebrow"><span></span> Simples, rápido e em alta qualidade</div>
+          <h1><span>Qualquer vídeo a um link de distância</span></h1>
+          <p class="hero-copy">Cole o link do vídeo que você quer baixar</p>
+
+          <form id="url-form" class="search-card">
+            <div class="input-wrap">
+              <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.4 13.6a1 1 0 0 0 1.4 1.4l4.6-4.6a3 3 0 0 0-4.2-4.2l-2.1 2.1a1 1 0 1 0 1.4 1.4l2.1-2.1a1 1 0 0 1 1.4 1.4l-4.6 4.6Zm3.2-3.2a1 1 0 0 0-1.4-1.4l-4.6 4.6a3 3 0 0 0 4.2 4.2l2.1-2.1a1 1 0 0 0-1.4-1.4l-2.1 2.1A1 1 0 0 1 9 15l4.6-4.6Z" fill="currentColor"/></svg>
+              <input id="video-url" type="url" placeholder="Cole o link do vídeo" autocomplete="off" required />
+              <div class="input-actions">
+                <button id="open-local-video" class="input-icon-button" type="button" title="Abrir vídeo do computador" aria-label="Abrir vídeo do computador">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h7l2 2h9v12H3V5Zm2 2v10h14V9h-7.8l-2-2H5Z" fill="currentColor"/></svg>
+                </button>
+                <button id="paste-button" class="paste-button" type="button" title="Colar link">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 4h-1.2A3 3 0 0 0 12 2a3 3 0 0 0-2.8 2H8a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-4-1a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm4 16H8V6h1v1h6V6h1v13Z" fill="currentColor"/></svg>
+                  Colar
+                </button>
+              </div>
+            </div>
+            <button class="primary-button" type="submit">
+              <span>Buscar vídeo</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 5-1.4 1.4 4.6 4.6H4v2h12.2l-4.6 4.6L13 19l7-7-7-7Z" fill="currentColor"/></svg>
+            </button>
+          </form>
+          <input id="local-video-input" type="file" accept="video/mp4,video/webm,video/quicktime,.m4v,.mkv,.avi" hidden />
+          <p id="message" class="message" role="status" aria-live="polite"></p>
+          <div id="browser-help" class="source-help hidden">
+            <strong id="browser-help-title">Use o botão de favoritos do Clipora</strong>
+            <p id="browser-help-text"></p>
+            <div class="extension-help">
+              <div class="extension-help-head">
+                <img src="/clipora-extensao-icone.png" alt="" width="40" height="40" />
+                <div>
+                  <strong>Extensão do Clipora para Chrome e Edge</strong>
+                  <p>Um clique no ícone baixa na hora o vídeo ou a imagem da página aberta, ou junta todas as imagens de um perfil ou site e traz para cá.</p>
+                </div>
+              </div>
+              <a class="extension-download" href="/clipora-extensao.zip" download>Baixar a extensão (.zip)</a>
+              <ol>
+                <li>Extraia o <code>clipora-extensao.zip</code> numa pasta que você não vá apagar (por exemplo, Documentos). Fica uma pasta chamada <b>clipora-extensao</b>.</li>
+                <li>Abra <code>chrome://extensions</code> no Chrome (no Edge, <code>edge://extensions</code>) e ligue o <b>Modo do desenvolvedor</b>.</li>
+                <li>Clique em <b>Carregar sem compactação</b> (no Edge, <b>Carregar descompactada</b>) e escolha a pasta <b>clipora-extensao</b>.</li>
+                <li>Clique no ícone de quebra-cabeça ao lado da barra de endereço e no alfinete do <b>Clipora</b>, para o ícone ficar sempre à vista.</li>
+                <li>Pronto: em qualquer página, clique no ícone roxo de download.</li>
+              </ol>
+              <p class="source-help-note">Baixe a extensão pelo mesmo endereço que você usa para abrir o Clipora: ela já vem apontando para ele (dá para trocar na engrenagem da janelinha). Para atualizar, baixe de novo, substitua a pasta e clique em recarregar (↻) no cartão do Clipora em chrome://extensions.</p>
+            </div>
+            <strong class="bookmarklet-title">Como usar</strong>
+            <ol id="browser-help-steps"></ol>
+            <p class="source-help-note">Quem lê a página é o seu próprio navegador, com o seu login; o Clipora só recebe a lista de imagens. Tinha o botão antigo de favoritos do Clipora? Pode apagá-lo da barra: a extensão faz tudo o que ele fazia.</p>
+          </div>
+        </section>
+
+        <section id="result" class="result-card hidden" aria-live="polite">
+          <div class="preview">
+            <img id="thumbnail" alt="Miniatura do vídeo" />
+            <span id="duration" class="duration"></span>
+            <div class="preview-shade"></div>
+            <span class="play-button"><svg viewBox="0 0 24 24"><path d="m9 7 8 5-8 5V7Z" fill="currentColor"/></svg></span>
+          </div>
+          <div class="video-details">
+            <div>
+              <span class="ready-label"><i></i> Vídeo encontrado</span>
+              <h2 id="video-title"></h2>
+              <p id="video-channel"></p>
+            </div>
+            <div>
+              <div class="quality-heading">
+                <h3>Escolha a qualidade</h3>
+                <span>Formato MP4</span>
+              </div>
+              <div id="quality-list" class="quality-list"></div>
+              <button id="page-images-button" class="page-images-button hidden" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm1 2v9.6l3.5-3.5 3 3 4-4.6L19 14V6H5Zm4 3.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" fill="currentColor"/></svg>
+                <span>Baixar as imagens desta página</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="gallery" class="gallery-card hidden" aria-live="polite">
+          <header class="gallery-header">
+            <div>
+              <span class="ready-label"><i></i> <span id="gallery-label">Post encontrado</span></span>
+              <h2 id="gallery-title"></h2>
+              <p id="gallery-meta"></p>
+              <p id="gallery-notes" class="gallery-notes hidden"></p>
+            </div>
+            <button id="gallery-save-all" class="primary-button gallery-save-all" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h7l2 2h9v12H3V5Zm2 2v10h14V9h-7.8l-2-2H5Zm6 3h2v3.2l1.3-1.3 1.4 1.4L12 16l-3.7-3.7 1.4-1.4 1.3 1.3V10Z" fill="currentColor"/></svg>
+              <span>Salvar tudo em uma pasta</span>
+            </button>
+          </header>
+          <div id="gallery-page-controls" class="gallery-page-controls hidden">
+            <div class="gallery-count" role="radiogroup" aria-label="Quantas imagens baixar">
+              <span class="gallery-count-label">Quantas baixar?</span>
+              <label><input type="radio" name="gallery-count" value="all" checked /> Todas <span id="gallery-count-all"></span></label>
+              <label><input type="radio" name="gallery-count" value="first" /> Só as primeiras <input id="gallery-count-number" type="number" min="1" step="1" value="20" inputmode="numeric" aria-label="Quantidade de imagens" /></label>
+              <label><input type="radio" name="gallery-count" value="pick" /> Só as de número <input id="gallery-count-pick" type="text" placeholder="ex.: 1, 4, 7-10" autocomplete="off" spellcheck="false" aria-label="Números das imagens, separados por vírgula; use hífen para intervalos" /></label>
+            </div>
+            <p id="gallery-count-error" class="gallery-count-error hidden" role="alert"></p>
+            <p class="gallery-count-hint">Clique na bolinha de cada imagem (ou na própria imagem) para marcar ou desmarcar: só as marcadas são baixadas, numeradas em sequência na pasta. Segure Shift e clique em outra imagem para levar a mesma escolha a todas as do meio. Em perfis e feeds (X, Instagram, Reddit) as primeiras são as mais recentes; num capítulo, são as primeiras páginas.</p>
+            <label id="gallery-small-toggle" class="gallery-small-toggle hidden"><input id="gallery-show-small" type="checkbox" /> <span id="gallery-small-text"></span></label>
+          </div>
+          <div id="gallery-folder-result" class="gallery-folder-result hidden">
+            <span id="gallery-folder-text"></span>
+            <button id="gallery-open-folder" type="button">Abrir pasta</button>
+          </div>
+          <div id="gallery-grid" class="gallery-grid"></div>
+        </section>
+
+        <section id="editor" class="editor-shell hidden" aria-label="Editor de cortes">
+          <header class="editor-header">
+            <div>
+              <span class="ready-label"><i></i> Sessão temporária</span>
+              <h2 id="editor-title">Editor de cortes</h2>
+              <p id="editor-meta">Selecione somente o que deseja exportar.</p>
+            </div>
+            <button id="close-editor" class="icon-button close-editor" type="button" title="Fechar editor" aria-label="Fechar editor">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.7 5.3 5.3 5.3 5.3-5.3 1.4 1.4-5.3 5.3 5.3 5.3-1.4 1.4-5.3-5.3-5.3 5.3-1.4-1.4 5.3-5.3-5.3-5.3 1.4-1.4Z" fill="currentColor"/></svg>
+            </button>
+          </header>
+
+          <div class="editor-workspace">
+            <div class="editor-player-column">
+              <div id="player-wrap" class="editor-player-wrap">
+                <video id="editor-video" controls preload="metadata"></video>
+              </div>
+              <div id="editor-crop-bar" class="crop-bar hidden">
+                <div class="crop-bar-row">
+                  <div class="crop-readout">
+                    <strong id="editor-crop-dimensions">Tela inteira</strong>
+                    <span id="editor-crop-note">Arraste sobre o vídeo para selecionar a área</span>
+                  </div>
+                  <div class="segmented" id="editor-crop-scale" role="group" aria-label="Tamanho do resultado">
+                    <button type="button" data-scale="real">Tamanho real</button>
+                    <button type="button" data-scale="fit">Ampliar</button>
+                  </div>
+                </div>
+                <div class="crop-bar-row">
+                  <div class="ratio-buttons" id="editor-crop-ratios" role="group" aria-label="Proporção"></div>
+                  <div class="crop-actions">
+                    <button id="editor-crop-preview" type="button">Visualizar</button>
+                    <button id="editor-crop-remove" class="danger" type="button">Remover recorte</button>
+                    <button id="editor-crop-done" class="primary" type="button">Concluir</button>
+                  </div>
+                </div>
+              </div>
+              <div class="player-readout">
+                <strong id="editor-current-time">00:00.000</strong>
+                <span>/</span>
+                <span id="editor-total-time">00:00.000</span>
+              </div>
+            </div>
+
+            <aside class="clip-panel">
+              <span class="panel-kicker">Extração rápida</span>
+              <h3>Marque o trecho</h3>
+              <p>Posicione o cursor, marque o início e o fim e mantenha somente essa seleção.</p>
+              <div class="mark-grid">
+                <button id="mark-in" type="button"><kbd>I</kbd><span>Início<strong id="in-value">00:00.000</strong></span></button>
+                <button id="mark-out" type="button"><kbd>O</kbd><span>Fim<strong id="out-value">--:--.---</strong></span></button>
+              </div>
+              <button id="keep-selection" class="keep-button" type="button" disabled>Manter somente a seleção</button>
+              <div class="selection-summary">
+                <span id="selection-duration-label">Duração marcada</span>
+                <strong id="selection-duration">0,0 s</strong>
+              </div>
+              <div id="segment-info" class="segment-info hidden">
+                <span id="segment-info-title">Trecho 1</span>
+                <strong id="segment-info-range">00:00.000 → 00:00.000</strong>
+                <small id="segment-info-length">0,0 s</small>
+              </div>
+              <div class="selection-summary crop-summary-row">
+                <span>Recorte da imagem</span>
+                <strong id="crop-summary">Tela inteira</strong>
+              </div>
+            </aside>
+          </div>
+
+          <div class="edit-toolbar" role="toolbar" aria-label="Ferramentas de corte">
+            <div class="tool-group">
+              <button id="undo-edit" class="tool-button" type="button" title="Desfazer (Ctrl+Z)" disabled>
+                <svg viewBox="0 0 24 24"><path d="M9 7V3L2 9l7 6v-4c5 0 8.5 1.5 11 5-1-5-4-9-11-9Z" fill="currentColor"/></svg>
+              </button>
+              <button id="redo-edit" class="tool-button" type="button" title="Refazer (Ctrl+Y)" disabled>
+                <svg viewBox="0 0 24 24"><path d="M15 7V3l7 6-7 6v-4c-5 0-8.5 1.5-11 5 1-5 4-9 11-9Z" fill="currentColor"/></svg>
+              </button>
+            </div>
+            <span class="toolbar-divider"></span>
+            <button id="split-edit" class="tool-button labeled" type="button" title="Dividir no cursor (S)">
+              <svg viewBox="0 0 24 24"><path d="m9.6 12-6.3-6.3 1.4-1.4 7.3 7.3 7.3-7.3 1.4 1.4-6.3 6.3 6.3 6.3-1.4 1.4-7.3-7.3-7.3 7.3-1.4-1.4L9.6 12Z" fill="currentColor"/></svg>
+              Dividir <kbd>S</kbd>
+            </button>
+            <button id="delete-segments" class="tool-button labeled danger" type="button" title="Excluir trechos selecionados (Delete)" disabled>
+              <svg viewBox="0 0 24 24"><path d="M8 5V3h8v2h5v2H3V5h5Zm-3 4h14l-1 12H6L5 9Zm3 2 .6 8h1.8l-.4-8H8Zm6 0-.4 8h1.8l.6-8h-2Z" fill="currentColor"/></svg>
+              Excluir
+            </button>
+            <span class="toolbar-divider"></span>
+            <button id="crop-edit" class="tool-button labeled" type="button" title="Recortar imagem (C)">
+              <svg viewBox="0 0 24 24"><path d="M6 2h2v14h14v2h-4v4h-2v-4H6V8H2V6h4V2Zm4 4h8v8h-2V8h-6V6Z" fill="currentColor"/></svg>
+              Recortar <kbd>C</kbd>
+            </button>
+            <div class="zoom-control">
+              <button id="zoom-out" type="button" aria-label="Diminuir zoom">−</button>
+              <input id="timeline-zoom" type="range" min="1" max="8" step="0.25" value="1" aria-label="Zoom da timeline" />
+              <button id="zoom-in" type="button" aria-label="Aumentar zoom">+</button>
+            </div>
+          </div>
+
+          <div id="timeline-scroll" class="timeline-scroll">
+            <div id="timeline-content" class="timeline-content">
+              <div id="timeline-thumbnails" class="timeline-thumbnails"></div>
+              <div class="waveform-row"><img id="timeline-waveform" alt="Forma de onda do áudio" /></div>
+              <div id="timeline-segments" class="timeline-segments"></div>
+              <div id="timeline-labels" class="timeline-labels"></div>
+              <span id="timeline-playhead" class="timeline-playhead"><i></i></span>
+            </div>
+          </div>
+          <div class="timeline-hint">
+            <span>Clique na timeline para mover o cursor. Arraste as bordas de um trecho para ajustá-lo (<kbd>Alt</kbd> desliga o ímã).</span>
+            <span><kbd>Espaço</kbd> reproduzir &nbsp; <kbd>S</kbd> dividir &nbsp; <kbd>Delete</kbd> excluir</span>
+          </div>
+
+          <footer class="editor-footer">
+            <div class="export-options">
+              <div class="option-group">
+                <span class="option-label">Formato</span>
+                <div class="segmented" role="group" aria-label="Formato de saída">
+                  <button type="button" data-format="mp4" class="active" aria-pressed="true">MP4</button>
+                  <button type="button" data-format="gif" aria-pressed="false">GIF</button>
+                </div>
+              </div>
+              <div id="mp4-options" class="option-group">
+                <span class="option-label">Compressão</span>
+                <div class="option-row">
+                  <select id="compression-mode" aria-label="Compressão">
+                    <option value="original">Original</option>
+                    <option value="light">Leve</option>
+                    <option value="medium">Média</option>
+                    <option value="strong">Forte</option>
+                    <option value="target">Tamanho alvo</option>
+                  </select>
+                  <label id="target-size-wrap" class="size-field hidden">
+                    <input id="target-size" type="number" min="0.5" max="100000" step="0.5" value="10" aria-label="Tamanho alvo em MB" />
+                    <span>MB</span>
+                  </label>
+                </div>
+              </div>
+              <div id="gif-options" class="option-group hidden">
+                <span class="option-label">GIF</span>
+                <div class="option-row">
+                  <select id="gif-size" aria-label="Tamanho do GIF (lado maior)">
+                    <option value="320">320 px</option>
+                    <option value="480" selected>480 px</option>
+                    <option value="640">640 px</option>
+                  </select>
+                  <select id="gif-fps" aria-label="Quadros por segundo">
+                    <option value="10">10 fps</option>
+                    <option value="15" selected>15 fps</option>
+                    <option value="24">24 fps</option>
+                  </select>
+                </div>
+              </div>
+              <small id="export-hint" class="export-hint"></small>
+            </div>
+            <div class="export-summary">
+              <span id="editor-segment-count">1 trecho</span>
+              <strong id="editor-output-duration">00:00</strong>
+            </div>
+            <button id="export-editor" class="primary-button export-button" type="button">
+              <span>Exportar clipe</span>
+              <svg viewBox="0 0 24 24"><path d="M11 3h2v10.2l3.6-3.6L18 11l-6 6-6-6 1.4-1.4 3.6 3.6V3Zm-6 16h14v2H5v-2Z" fill="currentColor"/></svg>
+            </button>
+          </footer>
+        </section>
+
+        <nav class="shortcuts" aria-label="Ferramentas rápidas">
+          <a class="shortcut-button" href="#gif">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 2v10h14V7H5Zm2 2h3v1.5H8.5v3H9V12h1v3H7V9Zm4.5 0H13v6h-1.5V9Zm2.5 0h3v1.5h-1.5v1h1.2V13h-1.2v2H14V9Z" fill="currentColor"/></svg>
+            <span>Converter para GIF</span>
+          </a>
+          <a class="shortcut-button" href="#comprimir">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v5.2l2.3-2.3 1.4 1.4L12 11 7.3 6.3l1.4-1.4L11 7.2V2Zm-7 9h16v2H4v-2Zm8 2 4.7 4.7-1.4 1.4-2.3-2.3V22h-2v-5.2l-2.3 2.3-1.4-1.4L12 13Z" fill="currentColor"/></svg>
+            <span>Comprimir Vídeo</span>
+          </a>
+          <a class="shortcut-button" href="#recortar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h2v14h14v2h-4v4h-2v-4H6V8H2V6h4V2Zm4 4h8v8h-2V8h-6V6Z" fill="currentColor"/></svg>
+            <span>Cortar Proporção</span>
+          </a>
+          <a class="shortcut-button" href="#imagens">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm1 2v9.6l3.5-3.5 3 3 4-4.6L19 14V6H5Zm0 12h14v-1.2l-3.6-4.2-4 4.6-2.9-2.9L5 17.8V18Zm4-8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" fill="currentColor"/></svg>
+            <span>Baixar Imagens</span>
+          </a>
+        </nav>
+
+        <section class="features">
+          <article>
+            <span class="feature-icon purple"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" fill="currentColor"/></svg></span>
+            <h3>Cortes rápidos</h3>
+            <p>Marque, divida e reenquadre só a parte que interessa do vídeo.</p>
+          </article>
+          <article>
+            <span class="feature-icon cyan"><svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 2v10h14V7H5Zm4 2 6 3-6 3V9Z" fill="currentColor"/></svg></span>
+            <h3>GIF em segundos</h3>
+            <p>Transforme trechos de até 10 s em GIFs leves, escolhendo o tamanho e a fluidez.</p>
+          </article>
+          <article>
+            <span class="feature-icon pink"><svg viewBox="0 0 24 24"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21l6.2-3.7 6.2 3.7-1.7-7.1L22 9.2l-7.2-.6L12 2Z" fill="currentColor"/></svg></span>
+            <h3>Qualidade flexível</h3>
+            <p>Escolha a resolução e comprima o clipe para caber no tamanho que você precisa.</p>
+          </article>
+        </section>
+      </div>
+
+      <!-- Ferramentas -->
+      <div id="tool-view" class="tool-view hidden">
+        <header class="tool-header">
+          <button id="tool-back" class="icon-button back-button" type="button" title="Voltar para a página inicial" aria-label="Voltar para a página inicial">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5 1.4 1.4L7.8 11H20v2H7.8l4.6 4.6L11 19l-7-7 7-7Z" fill="currentColor"/></svg>
+          </button>
+          <div>
+            <span class="panel-kicker">Ferramenta</span>
+            <h2 id="tool-title">Ferramenta</h2>
+            <p id="tool-description"></p>
+          </div>
+        </header>
+
+        <form id="tool-url-form" class="search-card tool-search">
+          <div class="input-wrap">
+            <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.4 13.6a1 1 0 0 0 1.4 1.4l4.6-4.6a3 3 0 0 0-4.2-4.2l-2.1 2.1a1 1 0 1 0 1.4 1.4l2.1-2.1a1 1 0 0 1 1.4 1.4l-4.6 4.6Zm3.2-3.2a1 1 0 0 0-1.4-1.4l-4.6 4.6a3 3 0 0 0 4.2 4.2l2.1-2.1a1 1 0 0 0-1.4-1.4l-2.1 2.1A1 1 0 0 1 9 15l4.6-4.6Z" fill="currentColor"/></svg>
+            <input id="tool-video-url" type="url" placeholder="Cole o link do vídeo" autocomplete="off" required />
+            <div class="input-actions">
+              <button id="tool-open-local" class="input-icon-button" type="button" title="Abrir vídeo do computador" aria-label="Abrir vídeo do computador">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h7l2 2h9v12H3V5Zm2 2v10h14V9h-7.8l-2-2H5Z" fill="currentColor"/></svg>
+              </button>
+              <button id="tool-paste" class="paste-button" type="button" title="Colar link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 4h-1.2A3 3 0 0 0 12 2a3 3 0 0 0-2.8 2H8a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-4-1a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm4 16H8V6h1v1h6V6h1v13Z" fill="currentColor"/></svg>
+                Colar
+              </button>
+            </div>
+          </div>
+          <button class="primary-button" type="submit"><span>Carregar vídeo</span></button>
+        </form>
+        <input id="tool-local-input" type="file" accept="video/mp4,video/webm,video/quicktime,.m4v,.mkv,.avi" hidden />
+        <p id="tool-message" class="message" role="status" aria-live="polite"></p>
+
+        <section id="tool-workspace" class="tool-workspace hidden">
+          <div class="tool-source">
+            <img id="tool-source-thumb" alt="" class="hidden" />
+            <div>
+              <strong id="tool-source-title"></strong>
+              <small id="tool-source-meta"></small>
+            </div>
+          </div>
+
+          <!-- Converter para GIF -->
+          <div id="panel-gif" class="tool-panel hidden">
+            <div id="gif-player-wrap" class="tool-player-wrap"><video id="gif-video" controls preload="metadata"></video></div>
+            <div id="gif-range"></div>
+            <div class="tool-options">
+              <div class="option-group">
+                <span class="option-label">Tamanho (lado maior)</span>
+                <select id="gif-tool-size">
+                  <option value="320">320 px</option>
+                  <option value="480" selected>480 px</option>
+                  <option value="640">640 px</option>
+                </select>
+              </div>
+              <div class="option-group">
+                <span class="option-label">Fluidez</span>
+                <select id="gif-tool-fps">
+                  <option value="10">10 fps</option>
+                  <option value="15" selected>15 fps</option>
+                  <option value="24">24 fps</option>
+                </select>
+              </div>
+              <button id="gif-run" class="primary-button tool-run" type="button"><span>Gerar GIF</span></button>
+            </div>
+          </div>
+
+          <!-- Comprimir vídeo -->
+          <div id="panel-compress" class="tool-panel hidden">
+            <div class="compress-stats">
+              <div><span>Tamanho atual</span><strong id="compress-current">—</strong></div>
+              <div><span>Duração</span><strong id="compress-duration">—</strong></div>
+              <div><span>Resolução</span><strong id="compress-resolution">—</strong></div>
+            </div>
+            <div class="option-group">
+              <span class="option-label">Compressão</span>
+              <div class="segmented large" id="compress-levels" role="group" aria-label="Nível de compressão">
+                <button type="button" data-level="light">Leve</button>
+                <button type="button" data-level="medium" class="active">Média</button>
+                <button type="button" data-level="strong">Forte</button>
+                <button type="button" data-level="target">Tamanho alvo</button>
+              </div>
+            </div>
+            <label id="compress-target-wrap" class="size-field large hidden">
+              <input id="compress-target" type="number" min="0.5" max="100000" step="0.5" value="10" aria-label="Tamanho alvo em MB" />
+              <span>MB</span>
+            </label>
+            <p id="compress-estimate" class="compress-estimate"></p>
+            <button id="compress-run" class="primary-button tool-run" type="button"><span>Comprimir vídeo</span></button>
+          </div>
+
+          <!-- Cortar proporção -->
+          <div id="panel-crop" class="tool-panel hidden">
+            <div id="crop-player-wrap" class="tool-player-wrap"><video id="crop-video" controls preload="metadata"></video></div>
+            <div class="crop-bar tool-crop-bar">
+              <div class="crop-bar-row">
+                <div class="crop-readout">
+                  <strong id="crop-tool-dimensions">Tela inteira</strong>
+                  <span id="crop-tool-note">Arraste sobre o vídeo para selecionar a área</span>
+                </div>
+                <div class="segmented" id="crop-tool-scale" role="group" aria-label="Tamanho do resultado">
+                  <button type="button" data-scale="real">Tamanho real</button>
+                  <button type="button" data-scale="fit">Ampliar</button>
+                </div>
+              </div>
+              <div class="crop-bar-row">
+                <div class="ratio-buttons" id="crop-tool-ratios" role="group" aria-label="Proporção"></div>
+                <div class="crop-actions">
+                  <button id="crop-tool-preview" type="button">Visualizar</button>
+                  <button id="crop-tool-remove" class="danger" type="button">Remover recorte</button>
+                </div>
+              </div>
+            </div>
+            <div id="crop-range"></div>
+            <div class="tool-options">
+              <button id="crop-run" class="primary-button tool-run" type="button"><span>Exportar vídeo</span></button>
+            </div>
+          </div>
+
+          <div id="tool-finish" class="tool-finish hidden">
+            <div>
+              <strong>Arquivo pronto!</strong>
+              <span>O download começou automaticamente.</span>
+            </div>
+            <div class="tool-finish-actions">
+              <button id="finish-new" type="button">Novo vídeo</button>
+              <button id="finish-again" type="button">Fazer outro com o mesmo vídeo</button>
+              <button id="finish-editor" class="link-button" type="button">Abrir no editor completo</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <span>Use somente para conteúdos próprios, licenciados ou com permissão do autor.</span>
+      <span>Clipora &copy; 2026</span>
+    </footer>
+
+    <div id="download-progress" class="download-progress hidden" aria-live="polite">
+      <div class="progress-header">
+        <span class="progress-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4h2v9l3.5-3.5 1.4 1.4-5.9 5.9-5.9-5.9 1.4-1.4L11 13V4Zm-5 15h12v2H6v-2Z" fill="currentColor"/></svg>
+        </span>
+        <div class="progress-copy">
+          <strong id="progress-title">Preparando seu MP4</strong>
+          <small id="progress-phase">Iniciando download...</small>
+        </div>
+        <strong id="progress-percent" class="progress-percent">0%</strong>
+      </div>
+      <div class="progress-track">
+        <span id="progress-fill" class="progress-fill"></span>
+      </div>
+      <div class="progress-footer">
+        <span>O arquivo será salvo automaticamente.</span>
+        <button id="cancel-download" type="button">Cancelar</button>
+      </div>
+    </div>
+
+    <dialog id="folder-dialog" class="folder-dialog" aria-labelledby="folder-dialog-title">
+      <form id="folder-form" novalidate>
+        <h3 id="folder-dialog-title">Salvar tudo em uma pasta</h3>
+        <label for="folder-name">Nome da pasta</label>
+        <input id="folder-name" type="text" maxlength="80" autocomplete="off" spellcheck="false" placeholder="ex.: viagem" />
+        <div id="folder-location" class="folder-location hidden">
+          <span id="folder-location-text"></span>
+          <button id="folder-change" type="button">Escolher pasta</button>
+        </div>
+        <!-- Só com o navegador no mesmo PC do Clipora; de outro PC quem escolhe é o navegador (acima). -->
+        <div id="folder-server-destination" class="folder-server-destination">
+          <label for="folder-destination">Salvar em</label>
+          <div class="folder-destination">
+            <select id="folder-destination">
+              <option value="desktop">Área de Trabalho</option>
+              <option value="downloads">Downloads</option>
+              <option value="custom">Outra pasta…</option>
+            </select>
+            <button id="folder-pick" class="hidden" type="button">Escolher…</button>
+          </div>
+        </div>
+        <p id="folder-hint" class="folder-hint"></p>
+        <p id="folder-error" class="folder-error" role="alert"></p>
+        <div class="folder-actions">
+          <button id="folder-cancel" type="button">Cancelar</button>
+          <button id="folder-confirm" class="primary" type="submit">Salvar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="drop-overlay" class="drop-overlay hidden">
+      <div>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 16V7.8l-2.6 2.6L7 9l5-5 5 5-1.4 1.4L13 7.8V16h-2Zm-6 2h14v2H5v-2Z" fill="currentColor"/></svg>
+        <strong>Solte o vídeo aqui</strong>
+      </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

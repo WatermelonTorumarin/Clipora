@@ -1,0 +1,12 @@
+# Dependências (o instalar.cmd baixa de novo, com FFmpeg e yt-dlp)
+node_modules/
+
+# Arquivos do Windows
+desktop.ini
+Thumbs.db
+
+# Segredos e arquivos locais
+.env
+.env.*
+!.env.example
+*.log

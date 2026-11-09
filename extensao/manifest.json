@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Clipora",
+  "version": "1.1.0",
+  "description": "Baixa o vÃ­deo, a imagem ou todas as imagens da pÃ¡gina aberta, pelo seu Clipora.",
+  "icons": {
+    "16": "icones/icone-16.png",
+    "32": "icones/icone-32.png",
+    "48": "icones/icone-48.png",
+    "128": "icones/icone-128.png"
+  },
+  "action": {
+    "default_title": "Baixar com o Clipora",
+    "default_icon": {
+      "16": "icones/icone-16.png",
+      "32": "icones/icone-32.png",
+      "48": "icones/icone-48.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["https://*.ts.net/*", "http://localhost/*", "http://127.0.0.1/*"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "minimum_chrome_version": "120"
+}
